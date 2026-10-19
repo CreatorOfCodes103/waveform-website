@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0b12">
+    <title>Waveform | Music Player</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="logo">wave<span>form</span><i>.</i></div>
+
+            <div class="side-label">BIBLIOTEKA</div>
+            <button class="nav active" data-view="all">♫ <span>Wszystkie utwory</span></button>
+            <button class="nav" data-view="recent">◷ <span>Ostatnio dodane</span></button>
+            <button class="nav" data-view="favorites">♡ <span>Ulubione</span></button>
+
+            <div class="side-label">TWOJA MUZYKA</div>
+            <button class="import-btn" id="importBtn">＋ Importuj muzykę</button>
+
+            <div class="sidebar-bottom">
+                <div class="mini-dot"></div>
+                <span>Twoja muzyka. Lokalnie.</span>
+            </div>
+        </aside>
+
+        <main>
+            <header class="topbar">
+                <div>
+                    <div class="status"><span class="live-dot"></span> YOUR PERSONAL PLAYER</div>
+                    <h2 class="page-heading" id="pageHeading">Twoja biblioteka</h2>
+                </div>
+                <input id="search" class="search" placeholder="⌕  Szukaj piosenek..." autocomplete="off">
+            </header>
+
+            <section class="hero">
+                <div class="hero-content">
+                    <div class="eyebrow">YOUR MUSIC. YOUR RULES.</div>
+                    <h1>Feel the<br><span>frequency.</span></h1>
+                    <p>Wszystkie Twoje dźwięki w jednym miejscu.</p>
+                    <button id="heroImport" class="primary-btn">＋ Wybierz piosenki</button>
+                    <div class="hero-note">MP3 · WAV · OGG · FLAC · M4A*</div>
+                </div>
+                <div class="hero-art" aria-hidden="true">
+                    <div class="art-ring ring-one"></div>
+                    <div class="art-ring ring-two"></div>
+                    <div class="art-ring ring-three"></div>
+                    <div class="art-core">♫</div>
+                </div>
+            </section>
+
+            <section class="library-section">
+                <div class="section-heading">
+                    <div>
+                        <h2 id="listHeading">Wszystkie utwory</h2>
+                        <p id="listSubtitle">Twoja kolekcja muzyczna</p>
+                    </div>
+                    <button class="text-btn" id="sortBtn">Najnowsze ↓</button>
+                </div>
+
+                <div class="list-header">
+                    <span>#</span>
+                    <span>UTWÓR</span>
+                    <span>CZAS</span>
+                    <span></span>
+                </div>
+
+                <div id="songList" class="song-list"></div>
+
+                <div id="empty" class="empty">
+                    <div class="empty-icon">♫</div>
+                    <h3>Twoja playlista czeka</h3>
+                    <p>Wybierz piosenki z urządzenia, żeby rozpocząć.</p>
+                    <button id="emptyImport" class="secondary-btn">Wybierz pliki audio</button>
+                </div>
+            </section>
+
+            <input id="fileInput" type="file" accept="audio/*,.mp3,.wav,.ogg,.flac,.m4a,.aac,.opus,.aiff" multiple
+                hidden>
+        </main>
+    </div>
+
+    <footer class="player">
+        <div class="now-playing">
+            <div class="cover" id="currentCover">♫</div>
+            <div class="track-info">
+                <div id="currentTitle" class="track-title">Nic nie odtwarzasz</div>
+                <div id="currentArtist" class="track-artist">Wybierz utwór z biblioteki</div>
+            </div>
+            <button id="favoriteCurrent" class="heart-btn" title="Dodaj do ulubionych">♡</button>
+        </div>
+
+        <div class="player-center">
+            <div class="controls">
+                <button id="shuffleBtn" class="control-btn" title="Losowo">⤨</button>
+                <button id="prevBtn" class="control-btn" title="Poprzedni utwór">|◀</button>
+                <button id="playBtn" class="play-btn" title="Odtwórz">▶</button>
+                <button id="nextBtn" class="control-btn" title="Następny utwór">▶|</button>
+                <button id="repeatBtn" class="control-btn" title="Powtarzaj">↻</button>
+            </div>
+            <div class="timeline">
+                <span id="elapsed">0:00</span>
+                <input id="progress" type="range" min="0" max="1000" value="0">
+                <span id="total">0:00</span>
+            </div>
+        </div>
+
+        <div class="volume-area">
+            <span>♫</span>
+            <input id="volume" type="range" min="0" max="1" step="0.01" value="0.8">
+        </div>
+    </footer>
+
+    <audio id="audio" preload="metadata"></audio>
+</body>
+
+</html>
